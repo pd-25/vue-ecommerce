@@ -1,11 +1,21 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
+  <HeaderComp />
   <router-view />
 </template>
-
+<script>
+import HeaderComp from "./components/HeaderComp.vue";
+export default {
+  name: "App",
+  components: {
+    HeaderComp,
+   
+  },
+};
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
