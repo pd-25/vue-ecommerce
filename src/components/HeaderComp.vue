@@ -1,12 +1,12 @@
 <template>
-    <header class="main-header">
+    <header id="myDIV" class="main-header" :class="{fixTop : 'sticky-header'}" @scroll="handleScroll">
         <div class="header-content">
             <ul class="left">
                 <li><router-link class="routerLink" to="/">Home</router-link></li>
                 <li><router-link class="routerLink" to="/about">About</router-link></li>
                 <li>Categories</li>
             </ul>
-            <div class="center">Pradipta Store</div>
+            <div class="center">Ecom Store</div>
             <div class="right">
                 <!-- <TbSearch /> -->
 
@@ -26,27 +26,38 @@
 <script>
 export default {
     name: 'HeaderComp',
-    created() {
-        window.addEventListener('scroll', this.handleScroll);
+    data() {
+        return {
+            scrollTop: 0,
+           
+        };
     },
+    created() {
+
+        window.addEventListener('scroll', this.handleScroll);
+
+    },
+
     unmounted() {
+
         window.removeEventListener('scroll', this.handleScroll);
+
     },
     methods: {
         handleScroll(event) {
-            const offsetPD = window.scrollY;
-            if(offsetPD > 200) {
-                // $('header').addClass('sticky-header')
-            var fixHeader = true;
-        }else {
-            var fixHeader = false;
+            this.scrollTop = window.scrollY;
+           if(this.scrollTop > 200) {
+            // document.getElementById("myDIV").element.classList.add(" sticky-header");
+            fixTop = 1;
+           }else {
+            // document.getElementById("myDIV").element.classList.remove("sticky-header");
+            fixTop = 0;
 
+           }
+        },
 
-
-        }
-        }
-    }
-}
+    },
+};
 </script>
 
 <style lang="scss">
