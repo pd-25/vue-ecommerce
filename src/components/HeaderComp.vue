@@ -1,5 +1,6 @@
 <template>
-    <header id="myDIV" class="main-header" :class="{fixTop : 'sticky-header'}" @scroll="handleScroll">
+    <header id="myDIV" class="main-header" v-bind:class="{ 'sticky-header': scrollPosition > 200, '': scrollPosition < 200 }">
+
         <div class="header-content">
             <ul class="left">
                 <li><router-link class="routerLink" to="/">Home</router-link></li>
@@ -28,35 +29,18 @@ export default {
     name: 'HeaderComp',
     data() {
         return {
-            scrollTop: 0,
-           
+            scrollPosition: null
         };
     },
-    created() {
-
-        window.addEventListener('scroll', this.handleScroll);
-
-    },
-
-    unmounted() {
-
-        window.removeEventListener('scroll', this.handleScroll);
-
-    },
     methods: {
-        handleScroll(event) {
-            this.scrollTop = window.scrollY;
-           if(this.scrollTop > 200) {
-            // document.getElementById("myDIV").element.classList.add(" sticky-header");
-            fixTop = 1;
-           }else {
-            // document.getElementById("myDIV").element.classList.remove("sticky-header");
-            fixTop = 0;
-
-           }
-        },
-
+        updateScroll() {
+            this.scrollPosition = window.scrollY
+        }
     },
+    mounted() {
+        window.addEventListener('scroll', this.updateScroll);
+    }
+
 };
 </script>
 
